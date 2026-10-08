@@ -90,6 +90,12 @@ jobs:
         echo 0 > /proc/sys/vm/nr_hugepages
         awk '/^HugePages_Total:/ { print "HugePages_Total after release: " $2 }' /proc/meminfo
 
+    - name: Show memory layout (temporary)
+      run: |
+        cat /proc/cmdline
+        awk '/^Node/ { zone = $4 } /^ +(present|managed) / { print zone, $1, $2 * 4 / 1024 " MiB" }' /proc/zoneinfo
+        grep -E '^(MemTotal|MemFree|HugePages_Total):' /proc/meminfo
+
     - name: autorun
       # Hugepages are allocated by autotest.sh after autobuild.sh is done, which
       # the small 8G VM needs: with them taken up front, the -j 4 build OOMs.
