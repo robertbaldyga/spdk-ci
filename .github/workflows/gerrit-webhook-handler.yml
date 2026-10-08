@@ -105,7 +105,7 @@ jobs:
       # Run the full test suite per patchset for now. The plan is to run the
       # full suite until OCF rework is merged. After that we can swich to
       # shorter CI suite and schedule the full suite as nightly scope.
-      test_script: test/ocf/ocf_all.sh
+      full_suite: true
       # The full suite takes ~2h20m on the Unvertical VM.
       timeout_minutes: 180
   # Add more jobs below if needed.
